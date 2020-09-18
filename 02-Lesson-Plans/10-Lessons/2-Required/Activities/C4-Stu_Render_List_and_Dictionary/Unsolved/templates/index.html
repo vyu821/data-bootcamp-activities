@@ -14,21 +14,29 @@
     <h1 class="jumbotron">Adopt!</h1>
     <div>
       <p>
-        We've adopted <span></span> pets this year!
+        We've adopted <span> {{ stats.pets_adopted }} </span> pets this year!
       </p>
       <p>
-        But there are still <span></span> pets available to be adopted!
+        But there are still <span>{{ stats.pets_for_adoption }}</span> pets available to be adopted!
       </p>
       <p>We have the following pet types</p>
       <ul style="list-style: nonel">
 
       <!-- Loop through the list of pet types -->
-
+        {% for val in types %}
+          <li>
+            {{ val }}
+          </li>
+        {% endfor %}
       </ul>
       <ul style="list-style: none;">
 
         <!-- Loop through the featured pets -->
-
+        {% for val in featured %}
+        <li>
+          Animal Name: {{ val.name }} || Animal Type: {{ val.type }}
+        </li>
+        {% endfor %}
       </ul>
     </div>
   </div>
