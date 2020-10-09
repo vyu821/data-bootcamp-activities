@@ -6,7 +6,7 @@ var queryUrl = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&s
 d3.json(queryUrl, function(data) {
   console.log(data.features);
   // Using the features array sent back in the API data, create a GeoJSON layer and add it to the map
-
+  let earthquakes = L.geoJSON(data.features).addTo(myMap);
 });
 
 // Define streetmap and darkmap layers
@@ -27,7 +27,7 @@ var darkmap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{
 // Define a baseMaps object to hold our base layers
 var baseMaps = {
   "Street Map": streetmap,
-  "Dark Map": darkmap
+  "Dark Map": darkmap,
 };
 
 // Create a new map
@@ -39,8 +39,13 @@ var myMap = L.map("map", {
   layers: [streetmap]
 });
 
+// overlay for earthquake geoJSON layer
+var overlayMap = {
+  "Earthquakes": earthquakes
+};
+
 // Create a layer control containing our baseMaps
 // Be sure to add an overlay Layer containing the earthquake GeoJSON
-L.control.layers(baseMaps, {
+L.control.layers(baseMaps, null, {
   collapsed: false
 }).addTo(myMap);
