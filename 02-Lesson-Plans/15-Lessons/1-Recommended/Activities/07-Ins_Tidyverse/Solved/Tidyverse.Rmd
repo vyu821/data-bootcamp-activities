@@ -1,0 +1,43 @@
+---
+title: "Tidyverse"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+# Note: Need to read in the data with `tidyverse` as that is the only way to make it availabe when knitting R markdown to HTML
+library(tidyverse)
+zillow_oc_2017 <- read_csv(file="../../02-Evr_Read_CSV/Resources/zillow_orange_county_2017.csv")
+```
+
+### Import Tidyverse
+
+```{r}
+library(tidyverse)
+```
+
+### Use the pipe operator with mutate to create a new calcualted field
+
+```{r}
+zillow_oc_2017 <- zillow_oc_2017 %>% mutate(acres=lotsizesquarefeet/43560) 
+```
+
+### Use the pipe operator with group_by to summarize and return the count of records by category
+
+```{r}
+grouped_by_zip <- zillow_oc_2017 %>% group_by(regionidzip) %>% summarize(Count=n())
+grouped_by_year <- zillow_oc_2017 %>% group_by(yearbuilt) %>% summarize(Count=n())
+```
+
+### Use the pipe operator with group_by to summarize and return summary statistics on multiple fieds
+
+```{r}
+grouped_by_year <- zillow_oc_2017 %>% group_by(yearbuilt) %>% summarize(
+                                                              Count=n(), 
+                                                              Mean_SqFt=mean(finishedsquarefeet), 
+                                                              Median_SqFt=median(finishedsquarefeet), 
+                                                              Max_Tax_Value=max(taxvaluedollarcnt))
+```
