@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Loan Approver</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <div class="panel m-top-75">
+          <div class="panel-body">
+            <h1 class="text-center">Open console!</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    // @NOTE: change these to test the code with different values
+    let income = 25000;
+    let debtIncomeRatio = .5;
+    let yearsInJob = 3;
+    let criminalRecord = false;
+    let goodCredit = true;
+
+    if (income < 30000) {
+      if (debtIncomeRatio < .5) {
+        console.log("No Loan");
+      }
+      else {
+        console.log("Loan");
+      }
+    }
+    else if(income >= 30000 && income < 75000) {
+      if (yearsInJob < 1) {
+        console.log("No Loan");
+      }
+      else if(yearsInJob >1 && yearsInJob < 5) {
+        if (goodCredit) {
+          console.log("Loan");
+        }
+        else {
+          console.log("No Loan");
+        }
+      }
+      else {
+        console.log("Loan");
+      }
+    }
+    else {
+      if (criminalRecord) {
+        console.log("No Loan");
+      }
+      else {
+        console.log("Loan");
+      }
+    }
+
+  </script>
+</body>
+
+</html>
